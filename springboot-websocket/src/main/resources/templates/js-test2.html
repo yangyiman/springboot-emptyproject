@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js-test1</title>
+</head>
+<body>
+<h1>测试js的函数</h1>
+<h2>此函数的作用就是点击div,获取当前时间</h2>
+<div id="div" onclick="showDate()">获取时间</div>
+<script>
+    function showDate() {
+        // var div = document.getElementById("div");
+        var elementsByTagName = document.getElementsByTagName("div");
+        console.log(elementsByTagName.length)
+        elementsByTagName[0].innerHTML = new Date().toLocaleString();
+        document.createElement("<h3>nihao </h3>")
+    }
+</script>
+</body>
+</html>

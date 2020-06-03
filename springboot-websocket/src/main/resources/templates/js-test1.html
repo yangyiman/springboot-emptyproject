@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js-test1</title>
+</head>
+<body>
+<h1>测试js的函数</h1>
+<h2>此函数的作用就是遍历指定两个数之间的整数,并以数组形式返回</h2>
+<script>
+    var arr = myFn(2,4);
+    console.log(arr);
+    function myFn(a,b) {
+        var arr = [];
+        for (var i=a,y=0;i<b;i++){
+            arr[y] = i;
+            y++;
+        }
+        return arr;
+    }
+</script>
+</body>
+</html>

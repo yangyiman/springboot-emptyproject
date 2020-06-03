@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:sch="http://www.yym.com/employee"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://www.yym.com/employee"
+                  targetNamespace="http://www.yym.com/employee">
+
+    <wsdl:types>
+        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                   elementFormDefault="qualified"
+                   targetNamespace="http://www.yym.com/employee">
+
+            <xs:element name="EmployeeDetailRequest">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="name" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:element name="EmployeeDetailResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Employee" type="tns:Employee"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+
+            <xs:complexType name="Employee">
+                <xs:sequence>
+                    <xs:element name="code" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="email" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+
+        </xs:schema>
+    </wsdl:types>
+
+    <wsdl:message name="EmployeeDetailRequest">
+        <wsdl:part element="tns:EmployeeDetailRequest" name="EmployeeDetailRequest">
+        </wsdl:part>
+    </wsdl:message>
+
+    <wsdl:message name="EmployeeDetailResponse">
+        <wsdl:part element="tns:EmployeeDetailResponse" name="EmployeeDetailResponse">
+        </wsdl:part>
+    </wsdl:message>
+
+    <wsdl:portType name="Employee">
+        <!-- 具体实现的类名       -->
+        <wsdl:operation name="EmployeeDetail">
+            <wsdl:input message="tns:EmployeeDetailRequest" name="EmployeeDetailRequest">
+            </wsdl:input>
+            <wsdl:output message="tns:EmployeeDetailResponse" name="EmployeeDetailResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+
+    <wsdl:binding name="EmployeeSoap11" type="tns:Employee">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="EmployeeDetail">
+            <soap:operation soapAction=""/>
+            <!-- 接口输入参数-->
+            <wsdl:input name="EmployeeDetailRequest">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <!-- 接口输出参数-->
+            <wsdl:output name="EmployeeDetailResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+
+    <wsdl:service name="EmployeeService">
+        <wsdl:port binding="tns:EmployeeSoap11" name="EmployeeSoap11">
+            <!-- 接口地址-->
+            <soap:address location="http://localhost/ws/getEmp"/>
+        </wsdl:port>
+    </wsdl:service>
+
+</wsdl:definitions>

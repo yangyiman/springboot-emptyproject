@@ -1,0 +1,139 @@
+<html>
+<head>
+    <meta charset="UTF-8"></meta>
+    <title>springboot项目ws测试demo</title>
+</head>
+<body>
+    <h3>springboot项目ws测试demo</h3>
+    <h4>测试说明</h4>
+    <h5>文本框中数据数据，点击‘发送测试’，文本框中的数据会发送到后台ws，后台接受到之后，会再推送数据到前端，展示在下方；点击关闭连接，可以关闭该ws；可以跟踪代码，了解具体的流程；代码上有详细注解</h5>
+    <br />
+    <input id="text" type="text" />
+    <button onclick="send()">发送测试</button>
+    <hr />
+    <button onclick="clos()">关闭连接</button>
+    <hr />
+    <div id="message"></div>
+    <a href="/copy/2">跳转copy2</a>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <button id = "btn" onclick="write()">点击刷新</button>
+    <script>
+        var ws = null;
+        var lockReconnect = false;//避免重复连接
+        var wsUrl = "192.168.89.120:8080/websocket"; //这个要与后端提供的相同
+        // 重连次数,重连5次失败就放弃重连
+        var reconnectionTimes = 0;
+
+        // 连接连接
+        function createWebSocket(url) {
+            try {
+                if ('WebSocket' in window) {
+                    ws = new WebSocket("ws://" + url);
+                }
+                initEventHandle();
+            } catch (e) {
+                console.log("eee")
+                reconnect(wsUrl);
+            }
+        }
+
+        // 重新连接,如果出现故障,就会间隔5s重连一次
+        var reconnectionDelay = null;
+        function reconnect(url) {
+            if(lockReconnect) return;
+            lockReconnect = true;
+            console.log("---------")
+            reconnectionTimes++;
+            if(reconnectionTimes == 5 && reconnectionDelay!=null){
+                lockReconnect = true;
+                clearTimeout(connectionDelay);
+            }
+            //没连接上会一直重连，设置延迟避免请求过多
+
+            // 5s执行函数,至少执行一次
+            reconnectionDelay = setTimeout(function () {
+                createWebSocket(wsUrl);
+                console.log("正在重连，当前时间"+new Date())
+                lockReconnect = false;
+            }, 5000); //这里设置重连间隔(ms)
+        }
+
+        // 初始化ws
+        function initEventHandle() {
+
+            // 连接成功建立后响应
+            ws.onopen = function() {
+                console.log("成功连接到" + wsUrl);
+                //心跳检测重置
+                heartCheck.reset().start();
+            }
+
+            // 收到服务器消息后响应
+            // 当5s之后收不到服务端消息时,就不会重置延迟任务,也就说明服务端挂掉了,然后执行ws的close方法
+            ws.onmessage = function(e) {
+                //如果获取到消息，心跳检测重置
+                //拿到任何消息都说明当前连接是正常的
+                heartCheck.reset().start();
+
+                console.log(e.data)
+
+            }
+
+            // 连接关闭后响应
+            ws.onclose = function() {
+                console.log("关闭连接");
+                reconnect(wsUrl);//重连
+                if(!reconnectionTimes == 5){
+                    console.log("关闭连接之后执行重连")
+                }
+            }
+
+            ws.onerror = function () {
+                console.log("遇到异常")
+                reconnect(wsUrl);//重连
+                console.log("异常之后执行重连")
+            };
+        }
+
+        //心跳检测
+        var heartCheck = {
+            timeout: 5000,//毫秒
+            timeoutObj: null,
+            serverTimeoutObj: null,
+            reset: function(){
+                clearTimeout(this.timeoutObj);
+                clearTimeout(this.serverTimeoutObj);
+                return this;
+            },
+            start: function(){
+                var self = this;
+                this.timeoutObj = setTimeout(function(){
+                    //这里发送一个心跳，后端收到后，返回一个心跳消息，
+                    //onmessage拿到返回的心跳就说明连接正常
+                    ws.send("ping");
+                    console.log("ping");
+                    // 如果onclose会执行reconnect，我们执行ws.close()就行了.如果直接执行reconnect 会触发onclose导致重连两次
+                    // 如果5s之后没有收到服务端的回复,就挂机
+                    self.serverTimeoutObj = setTimeout(function(){
+                        ws.close();},self.timeout)
+                },this.timeout)
+            }
+        }
+
+        window.onbeforeunload = function(){
+            ws.close();
+        }
+
+        function clos(){
+            lockReconnect = true;
+            ws.close();
+        }
+        // 开启连接
+        createWebSocket(wsUrl);
+
+    </script>
+</body>
+</html>

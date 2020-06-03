@@ -1,0 +1,18 @@
+server:
+  port: 80
+
+# 服务监控的配置
+management:
+  server:
+    port: 81
+    servlet:
+      context-path: /myactuator  #添加访问的上下文路径
+  endpoints:
+    web:
+      exposure:
+        include: "*"  #默认只开启healty和info,这里配置全部开启
+    enabled-by-default: true #开启所有端口,security废除掉了
+  endpoint:
+    health:
+      show-details: always
+
