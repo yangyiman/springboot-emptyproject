@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
  * </p>
  *
  * @author yym
- * @since 2020-01-19
+ * @since 2020-06-04
  */
 @RestController
-@RequestMapping("/mysql/remote-category")
-public class RemoteCategoryController {
+@RequestMapping("/mysql/tb-user2")
+public class TbUser2Controller {
 
 }
