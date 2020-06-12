@@ -28,7 +28,8 @@
     <!--加载mapper文件-->
     <mappers>
         <!--<package name="mapper/*Mapper.xml"/>-->
-        <mapper resource="mapper/TbClassMapper.xml"/>
+<!--        <mapper resource="mapper/TbClassMapper.xml"/>-->
+        <mapper resource="mapper/TbStudentMapper.xml"/>
     </mappers>
 
 </configuration>

@@ -28,6 +28,8 @@
         <module>../springboot-rabbitmq</module>
         <module>../springboot-vue-api</module>
         <module>../springboot-html2image</module>
+        <module>../springboot-common</module>
+        <module>../springboot-security</module>
     </modules>
 
     <parent>
@@ -108,4 +110,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

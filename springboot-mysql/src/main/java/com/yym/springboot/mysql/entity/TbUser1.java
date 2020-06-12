@@ -3,6 +3,8 @@ package com.yym.springboot.mysql.entity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+import java.time.LocalDate;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -26,6 +28,8 @@ public class TbUser1 implements Serializable {
     private Integer id;
 
     private String name;
+
+    private LocalDate startedAt;
 
 
 }

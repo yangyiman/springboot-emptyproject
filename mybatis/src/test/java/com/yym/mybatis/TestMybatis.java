@@ -1,7 +1,9 @@
 package com.yym.mybatis;
 
 import com.yym.mybatis.dao.TbClassDao;
+import com.yym.mybatis.dao.TbStudentDao;
 import com.yym.mybatis.entity.TbClass;
+import com.yym.mybatis.entity.TbStudent;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -85,6 +87,8 @@ public class TestMybatis {
     /**
      * 有更新情况下,会使二级缓存失效
      */
+    /*
+
     @Test
     public void test(){
         // 先获取结果并放入缓存中
@@ -109,5 +113,30 @@ public class TestMybatis {
         TbClassDao mapper3 = sqlSession3.getMapper(TbClassDao.class);
         TbClass tbClass3 = mapper3.selectOne(2);
         System.out.println("tbClass3 = " + tbClass3);
+    }
+
+     */
+
+
+    /**
+     * 测试mybatis嵌套结果
+     * 连表查询,然后将结果一一映射
+     */
+    @Test
+    public void nestResult(){
+        TbStudentDao tbStudentDaoProxy = sqlSession.getMapper(TbStudentDao.class);
+        TbStudent tbStudent = tbStudentDaoProxy.selectStudentByIdNestResult(3);
+        System.out.println("tbStudent = " + tbStudent);
+    }
+
+    /**
+     * 测试mybatis嵌套查询  resultMap关联 association collection
+     * 执行多次查询,将结果拼凑在一起
+     */
+    @Test
+    public void nestQuery(){
+        TbStudentDao tbStudentDaoProxy = sqlSession.getMapper(TbStudentDao.class);
+        TbStudent tbStudent = tbStudentDaoProxy.selectStudentByIdNestQuery(2);
+        System.out.println("tbStudent = " + tbStudent);
     }
 }

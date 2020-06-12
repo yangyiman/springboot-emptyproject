@@ -15,4 +15,6 @@ public interface ITbUser2Service extends IService<TbUser2> {
     public void insertRequired2(TbUser2 user2);
 
     public void insertRequired2Exception(TbUser2 user2);
+
+    void insertNotSupport(TbUser2 user2);
 }

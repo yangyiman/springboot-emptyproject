@@ -14,6 +14,4 @@ import java.time.LocalDateTime;
 public class TbClass implements Serializable {
     private Integer id;
     private String className;
-    private String status;
-    private LocalDateTime startedAt;
 }

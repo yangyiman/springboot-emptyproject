@@ -14,7 +14,11 @@
         select * from tb_class where id = #{id}
     </select>
 
-    <update id="updateOne" parameterType="com.yym.mybatis.entity.TbClass">
+<!--    <update id="updateOne" parameterType="com.yym.mybatis.entity.TbClass">
         update tb_class set class_name = #{className},status = #{status}  where id = #{id}
-    </update>
+    </update>-->
+
+    <update id="updateOne" parameterType="com.yym.mybatis.entity.TbClass">
+        update tb_class set class_name = #{className} where id = #{id}
+    </update>-->
 </mapper>

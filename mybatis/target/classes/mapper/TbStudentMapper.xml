@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yym.mybatis.dao.TbStudentDao" >
+    <select id="selectStudentByIdNestQuery" resultMap="studentMap" resultType="com.yym.mybatis.entity.TbStudent">
+        select * from tb_student where id = #{id}
+    </select>
+
+    <!--嵌套查询 ,对象的属性为property,数据库查询的条件为column,会将此条件传递进去再次查询-->
+    <resultMap id="studentMap" type="com.yym.mybatis.entity.TbStudent">
+       <association property="tbClass" column="class_id" select="selectClassById" />
+    </resultMap>
+
+    <select id="selectClassById" resultType="com.yym.mybatis.entity.TbClass">
+        select * from  tb_class where id = #{id}
+    </select>
+    
+    
+    <select id="selectStudentByIdNestResult"  resultMap="studentNestResult">
+        select s.*,c.* from tb_student s join tb_class c on s.class_id = c.id where s.id = #{id}      
+    </select>
+    
+    <resultMap id="studentNestResult" type="com.yym.mybatis.entity.TbStudent">
+        <id property="id" column="id"></id>
+        <result property="age" column="age"></result>
+        <result property="name" column="name"></result>
+        <result property="gender" column="gender"></result>
+        <association property="tbClass" resultMap="classMap"></association>
+    </resultMap>
+
+    <resultMap id="classMap" type="com.yym.mybatis.entity.TbClass">
+        <id property="id" column="id"></id>
+        <result property="className" column="class_name"></result>
+    </resultMap>
+</mapper>

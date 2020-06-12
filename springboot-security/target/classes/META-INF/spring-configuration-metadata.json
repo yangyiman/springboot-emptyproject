@@ -1,0 +1,17 @@
+{
+  "groups": [
+    {
+      "name": "security.ignore",
+      "type": "com.yym.springboot.security.config.IgnoreUrlProperties",
+      "sourceType": "com.yym.springboot.security.config.IgnoreUrlProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "security.ignore.urls",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.yym.springboot.security.config.IgnoreUrlProperties"
+    }
+  ],
+  "hints": []
+}

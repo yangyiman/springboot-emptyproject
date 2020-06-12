@@ -1,0 +1,8 @@
+-------------------------------------------------------------------------------
+Test set: com.yym.springboot.jwt.util.JwtUtilsTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.783 s <<< FAILURE! - in com.yym.springboot.jwt.util.JwtUtilsTest
+test(com.yym.springboot.jwt.util.JwtUtilsTest)  Time elapsed: 0.032 s  <<< ERROR!
+java.lang.RuntimeException: token过期
+	at com.yym.springboot.jwt.util.JwtUtilsTest.test(JwtUtilsTest.java:24)
+
