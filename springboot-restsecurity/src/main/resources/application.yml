@@ -1,0 +1,13 @@
+server:
+  port: 8888
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cache-enabled: true
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*Mapper.xml
+security:
+  ignore:
+    urls:
+      - /druid/stat
+      - /druid/**
