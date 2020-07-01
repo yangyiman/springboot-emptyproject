@@ -1,6 +1,7 @@
 package com.yym.springboot.security.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.yym.springboot.security.domain.JwtUser;
 import com.yym.springboot.security.entity.JdUser;
@@ -18,6 +19,13 @@ import java.util.List;
 
 /**
  * springsecurity获取用户信息的实现类
+ *
+ * 此处加入角色时,需要加入前缀ROLE_,加入权限则不需要
+ *
+ *
+ *  当用户登录时，authenticationManager进行响应，通过用户输入的用户名和密码，然后再根据用户定义的密码（可以加算法和盐值等）进行计算并和数据库比对，
+ *  当正确时通过验证。此时myUserDetailService进行响应，根据用户名从数据库中提取该用户的权限列表，组合成UserDetails供Spring Security使用。
+ *
  */
 @Service
 public class JwtUserDetailsServiceImpl implements JwtUserDetailsService {
@@ -27,25 +35,13 @@ public class JwtUserDetailsServiceImpl implements JwtUserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        LambdaQueryWrapper<JdUser> wrapper = Wrappers.lambdaQuery();
-        wrapper.eq(JdUser::getUsername,username);
-        // 防止找到多个,所以try-catch
-        try {
-            JdUser user = jdUserMapper.selectOne(wrapper);
-            if (user != null) {
-                JwtUser jwtUser = new JwtUser();
-                jwtUser.setId(user.getId());
-                jwtUser.setUsername(user.getUsername());
-                jwtUser.setPassword(user.getPassword());
-                List<GrantedAuthority> authorities = new ArrayList<>();
-                GrantedAuthority oneRole = new SimpleGrantedAuthority(user.getRole());
-                authorities.add(oneRole);
-                jwtUser.setAuthorities(authorities);
-                return jwtUser;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        JwtUser jwtUser = jdUserMapper.selectMany(username);
+        if(null==jwtUser){
+            throw new UsernameNotFoundException("当前用户不存在");
         }
-        return null;
+        if(CollectionUtils.isEmpty(jwtUser.getRoleList())){
+            throw new UsernameNotFoundException("当前用户无角色");
+        }
+        return jwtUser;
     }
 }

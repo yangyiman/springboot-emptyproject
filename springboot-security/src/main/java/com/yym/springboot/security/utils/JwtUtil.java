@@ -1,14 +1,19 @@
 package com.yym.springboot.security.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.yym.springboot.security.domain.JwtUser;
+import com.yym.springboot.security.entity.JdRole;
 import com.yym.springboot.security.entity.JdUser;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * jwt的工具类
@@ -34,13 +39,13 @@ public class JwtUtil {
     }
 
     public static String generateToken(JwtUser user){
-        Map<String, Object> map = new HashMap<>();
-        map.put("username",user.getUsername());
-        map.put("role",user.getRole());
+        Claims claims = Jwts.claims().setSubject(user.getUsername());
+        List<JdRole> roleList = user.getRoleList();
+        claims.put("roleIds", JSON.toJSONString(roleList.stream().map(JdRole::getId).collect(Collectors.toList())));
         return Jwts
                 .builder()
                 .setSubject(user.getUsername())
-                .setClaims(map)
+                .setClaims(claims)
                 .signWith(SignatureAlgorithm.HS256,TOKEN_SALT)
                 .setExpiration(new Date(System.currentTimeMillis()+TOKEN_EXPIRE_SECOND*1000))
                 .compact();
@@ -52,8 +57,8 @@ public class JwtUtil {
     }
 
     public static String getUsername(String token){
-        //return parseToken(token).getSubject();
-        return parseToken(token).get("username",String.class);
+        return parseToken(token).getSubject();
+        //return parseToken(token).get("username",String.class);
     }
 
     public static String getRole(String token){
@@ -61,8 +66,13 @@ public class JwtUtil {
     }
 
     public static boolean isExpire(String token){
-        Date expiration = parseToken(token).getExpiration();
-        return new Date().after(expiration);
+        try {
+            Date expiration = parseToken(token).getExpiration();
+            return new Date().after(expiration);
+        } catch (ExpiredJwtException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
     /*public static void main(String[] args) {

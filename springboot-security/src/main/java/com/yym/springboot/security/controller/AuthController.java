@@ -1,15 +1,14 @@
 package com.yym.springboot.security.controller;
 
-import com.alibaba.fastjson.JSON;
+import com.yym.springboot.common.entity.ResultModel;
 import com.yym.springboot.security.entity.JdUser;
 import com.yym.springboot.security.service.IJdUserService;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/auth")
@@ -22,16 +21,7 @@ public class AuthController {
     @PostMapping("/register")
     public String addUser(@RequestBody JdUser jdUser){
         jdUser.setPassword(encoder.encode(jdUser.getPassword()));
-        boolean save = iJdUserService.save(jdUser);
-        Map<String, Object> map = new HashMap<>();
-        map.put("status", 200);
-        map.put("msg", "插入成功");
-        map.put("data",jdUser);
-        return JSON.toJSONString(map);
-    }
-
-    @GetMapping("/test")
-    public String test(){
-        return "试试水";
+        iJdUserService.save(jdUser);
+        return ResultModel.success200WithOperation2Json();
     }
 }

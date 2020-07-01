@@ -11,8 +11,8 @@ import java.lang.reflect.Proxy;
  * JDk帮我们实现了动态代理，使用的是newProxyInstance方法
  * public static Object newProxyInstance(ClassLoader loader,Class<?>[] interfaces,InvocationHandler h)
  * 该方法中接收三个参数：
- * ClassLoader loader,:指定当前目标对象使用类加载器
- * Class<?>[] interfaces,:代理类需要实现的接口列表
+ * ClassLoader loader,:指定当前目标对象使用类加载器  boostrap classloader/ extentions classloader appclassloader
+ * Class<?>[] interfaces,:代理类需要实现的接口列表   被代理对象的接口列表
  * InvocationHandler h:调用处理程序,将目标对象的方法分派到该调用处理程序
  *
  * 此处为UserInterfaceImpl生成一个代理类,还是实现新增用户打印一句话

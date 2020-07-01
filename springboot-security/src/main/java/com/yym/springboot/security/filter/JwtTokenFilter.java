@@ -1,5 +1,6 @@
 package com.yym.springboot.security.filter;
 
+import com.yym.springboot.security.domain.JwtUser;
 import com.yym.springboot.security.service.JwtUserDetailsService;
 import com.yym.springboot.security.utils.JwtUtil;
 import com.yym.springboot.security.utils.ResponseUtil;
@@ -51,7 +52,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = jwtUserDetailsService.loadUserByUsername(username);
             if (userDetails != null) {
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                JwtUser jwtUser = (JwtUser) userDetails;
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(jwtUser, null, jwtUser.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }

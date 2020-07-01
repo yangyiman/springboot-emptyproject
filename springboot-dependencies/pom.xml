@@ -30,6 +30,9 @@
         <module>../springboot-html2image</module>
         <module>../springboot-common</module>
         <module>../springboot-security</module>
+        <module>../springboot-annotation-aop</module>
+        <module>../springboot-web</module>
+        <module>../springboot-restsecurity</module>
     </modules>
 
     <parent>
@@ -98,6 +101,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.yym</groupId>
+            <artifactId>springboot-common</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
     </dependencies>

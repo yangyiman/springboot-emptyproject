@@ -1,5 +1,6 @@
 package com.yym.springboot.security.mapper;
 
+import com.yym.springboot.security.domain.JwtUser;
 import com.yym.springboot.security.entity.JdUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -13,4 +14,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface JdUserMapper extends BaseMapper<JdUser> {
 
+    JwtUser selectMany(String username);
 }

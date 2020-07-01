@@ -8,6 +8,7 @@ import com.yym.springboot.security.service.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * springsecurity的配置类
  */
 @EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -51,6 +52,7 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
                 //.antMatchers("/jd-user/**").hasRole("ADMIN")
                 // 其他都需要认证
                 .anyRequest().authenticated()
+                //.anyRequest().access("@myRbacServiceImpl.checkAuthority(authentication,request)")
                 .and()
                 // 配置登出的处理器
                 .logout().logoutSuccessHandler(new JwtLogoutSeccessHandler()).permitAll()

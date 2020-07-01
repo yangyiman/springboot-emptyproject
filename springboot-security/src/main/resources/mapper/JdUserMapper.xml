@@ -1,5 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yym.springboot.security.mapper.JdUserMapper">
+    <select id="selectMany" resultMap="ManyMap">
+        select * from jd_user where username = #{username}
+    </select>
+    
+    <resultMap id="ManyMap" type="com.yym.springboot.security.domain.JwtUser">
+        <id column="id" property="id"></id>
+        <result column="password" property="password"></result>
+        <result column="username" property="username"></result>
+        <collection property="roleList" column="id" select="selectRoleByUserId" ></collection>
+        <collection property="permissionList" column="id" select="selectPermissionByUserId"></collection>
+    </resultMap>
 
+    <select id="selectRoleByUserId" resultType="com.yym.springboot.security.entity.JdRole">
+        select r.* from jd_map_user_role ur
+        join jd_role r on ur.role_id = r.id
+        where ur.user_id = #{id}
+    </select>
+
+    <select id="selectPermissionByUserId" resultType="com.yym.springboot.security.entity.JdPermission">
+        select p.* from jd_map_user_role ur
+        join jd_map_role_permission rp on ur.role_id = rp.role_id
+        join jd_permission p on rp.permission_id = p.id
+        where ur.user_id = #{id}
+    </select>
 </mapper>

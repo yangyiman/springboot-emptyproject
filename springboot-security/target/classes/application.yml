@@ -1,3 +1,4 @@
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
@@ -15,3 +16,5 @@ security:
     urls:
       - /hello
       - /hi
+server:
+  port: 90
