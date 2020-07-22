@@ -1,10 +1,13 @@
+com\yym\springboot\common\exception\CommonException.class
 com\yym\springboot\common\util\LogUtil.class
 com\yym\springboot\common\util\ExcelUtil$ExcelListener.class
 com\yym\springboot\common\util\UUIDUtil.class
 com\yym\springboot\common\util\ExcelUtil$MultipleSheelPropety.class
 com\yym\springboot\common\util\HttpConnect.class
 com\yym\springboot\common\util\CustomPage.class
+com\yym\springboot\common\exception\CommonExceptionResolver.class
 com\yym\springboot\common\util\DateUtil.class
+com\yym\springboot\common\exception\ArgumentExceptionControllerAdvice.class
 com\yym\springboot\common\util\ExcelUtil.class
 com\yym\springboot\common\entity\ResultModel.class
 com\yym\springboot\common\util\IpUtils.class

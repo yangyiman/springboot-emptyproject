@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="springboot-swagger2" />
+        <module name="mybatis" />
+        <module name="springboot-quartz" />
+        <module name="springboot-actuator" />
+        <module name="springboot-aop" />
+        <module name="springboot-restsecurity" />
+        <module name="springboot-soap" />
+        <module name="springboot-socketclient" />
+        <module name="springboot-rabbitmq" />
+        <module name="springboot-security" />
+        <module name="springboot-vue-api" />
+        <module name="springboot-base-java" />
+        <module name="spring-base" />
+        <module name="springboot-async" />
+        <module name="springboot-mysql" />
+        <module name="springboot-web" />
+        <module name="springboot-jwt" />
+        <module name="springboot-annotation-aop" />
+        <module name="springboot-redis" />
+        <module name="springboot-html2image" />
+        <module name="springboot-validated" />
+        <module name="springboot-common" />
+        <module name="springboot-upload" />
+        <module name="springboot-sfjson" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="maven-archiver" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="springboot-actuator" options="-parameters" />
+      <module name="springboot-annotation-aop" options="-parameters" />
+      <module name="springboot-aop" options="-parameters" />
+      <module name="springboot-async" options="-parameters" />
+      <module name="springboot-base-java" options="-parameters" />
+      <module name="springboot-codegenerator" options="-parameters" />
+      <module name="springboot-common" options="-parameters" />
+      <module name="springboot-html2image" options="-parameters" />
+      <module name="springboot-jwt" options="-parameters" />
+      <module name="springboot-mysql" options="-parameters" />
+      <module name="springboot-quartz" options="-parameters" />
+      <module name="springboot-rabbitmq" options="-parameters" />
+      <module name="springboot-redis" options="-parameters" />
+      <module name="springboot-restsecurity" options="-parameters" />
+      <module name="springboot-security" options="-parameters" />
+      <module name="springboot-sfjson" options="-parameters" />
+      <module name="springboot-soap" options="-parameters" />
+      <module name="springboot-socketclient" options="-parameters" />
+      <module name="springboot-swagger2" options="-parameters" />
+      <module name="springboot-upload" options="-parameters" />
+      <module name="springboot-validated" options="-parameters" />
+      <module name="springboot-vue-api" options="-parameters" />
+      <module name="springboot-web" options="-parameters" />
+    </option>
+  </component>
+</project>

@@ -46,8 +46,6 @@ public class JwtUtil {
     }
 
     public static Claims parseToken(String token){
-        System.out.println("row --- token = " + row_token);
-        System.out.println("parse --- token = " + token);
         if (StringUtils.isNotBlank(token)) {
             // 解析token
             Claims claims = null;
@@ -63,5 +61,7 @@ public class JwtUtil {
         }
         throw new RuntimeException("token为空");
     }
+
+
 
 }

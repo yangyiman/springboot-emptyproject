@@ -76,6 +76,12 @@
                 <artifactId>fastjson</artifactId>
                 <version>${fastjson.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>com.yym</groupId>
+                <artifactId>springboot-common</artifactId>
+                <version>${project.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -103,11 +109,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.yym</groupId>
-            <artifactId>springboot-common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+
 
     </dependencies>
 

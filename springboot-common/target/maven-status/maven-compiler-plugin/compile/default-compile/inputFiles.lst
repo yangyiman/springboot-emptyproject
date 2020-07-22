@@ -9,6 +9,7 @@ D:\Idea\IdeaProjects\springboot-emptyproject\springboot-common\src\main\java\com
 D:\Idea\IdeaProjects\springboot-emptyproject\springboot-common\src\main\java\com\yym\springboot\common\exception\CommonExceptionResolver.java
 D:\Idea\IdeaProjects\springboot-emptyproject\springboot-common\src\main\java\com\yym\springboot\common\util\CustomPage.java
 D:\Idea\IdeaProjects\springboot-emptyproject\springboot-common\src\main\java\com\yym\springboot\common\util\HttpConnect.java
+D:\Idea\IdeaProjects\springboot-emptyproject\springboot-common\src\main\java\com\yym\springboot\common\exception\ArgumentExceptionControllerAdvice.java
 D:\Idea\IdeaProjects\springboot-emptyproject\springboot-common\src\main\java\com\yym\springboot\common\util\JsonUtils.java
 D:\Idea\IdeaProjects\springboot-emptyproject\springboot-common\src\main\java\com\yym\springboot\common\util\UUIDUtil.java
 D:\Idea\IdeaProjects\springboot-emptyproject\springboot-common\src\main\java\com\yym\springboot\common\util\ExcelUtil.java

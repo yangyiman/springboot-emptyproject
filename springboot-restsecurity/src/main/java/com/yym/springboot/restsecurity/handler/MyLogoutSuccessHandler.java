@@ -1,6 +1,7 @@
 package com.yym.springboot.restsecurity.handler;
 
 import com.yym.springboot.common.entity.ResultModel;
+import com.yym.springboot.restsecurity.util.JwtUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 
@@ -15,6 +16,8 @@ import java.io.IOException;
 public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        // 将token失效
+
         response.setContentType("application/json;charset=utf-8");
         response.getWriter().write(ResultModel.successNoData2Json(200,"退出登录成功"));
     }

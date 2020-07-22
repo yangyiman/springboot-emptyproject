@@ -97,7 +97,9 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
                 fi.getRequest().setAttribute(FILTER_APPLIED, Boolean.TRUE);
             }
 
-            /* 调用父类的beforeInvocation ==> accessDecisionManager.decide(..) */
+            /* 调用父类的beforeInvocation ==> accessDecisionManager.decide(..)
+            *  调用参数
+            * */
             InterceptorStatusToken token = super.beforeInvocation(fi);
 
             try {

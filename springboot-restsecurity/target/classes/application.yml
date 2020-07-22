@@ -9,5 +9,9 @@ mybatis-plus:
 security:
   ignore:
     urls:
-      - /druid/stat
       - /druid/**
+      - /redis/**
+spring:
+  redis:
+    host: 192.168.3.33
+    port: 6379

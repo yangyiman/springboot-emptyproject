@@ -4,6 +4,7 @@ import com.yym.springboot.restsecurity.entity.TbMan;
 import com.yym.springboot.restsecurity.mapper.TbManMapper;
 import com.yym.springboot.restsecurity.securitypojo.JwtUser;
 import com.yym.springboot.restsecurity.service.IManUserDetailsService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,9 +25,7 @@ public class ManUserDetailsServiceImpl implements IManUserDetailsService {
             throw new UsernameNotFoundException("用户不存在,请刷新后重试");
         }
         JwtUser jwtUser = new JwtUser();
-        jwtUser.setId(tbMan.getId());
-        jwtUser.setUsername(tbMan.getUsername());
-        jwtUser.setPassword(tbMan.getPassword());
+        BeanUtils.copyProperties(tbMan,jwtUser);
         jwtUser.setPermissions(tbManMapper.selectPermissionByUsername(username));
         return jwtUser;
     }

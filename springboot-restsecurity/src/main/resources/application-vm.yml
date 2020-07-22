@@ -27,12 +27,30 @@ spring:
           username: root
           password: root
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://192.168.3.33:3306/my_db?characterEncoding=utf8&useSSL=false&autoReconnect=true&failOverReadOnly=false&autoReconnectForPools=true&allowMultiQueries=true&serverTimezone=Hongkong
+          url: jdbc:mysql://192.168.3.33:3306/my_db?characterEncoding=utf8&useSSL=false&autoReconnect=true&failOverReadOnly=false&autoReconnectForPools=true&allowMultiQueries=true&serverTimezone=Hongkong&allowPublicKeyRetrieval=true
         read:
           username: root
           password: root
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://192.168.3.33:3307/my_db?characterEncoding=utf8&useSSL=false&autoReconnect=true&failOverReadOnly=false&autoReconnectForPools=true&allowMultiQueries=true&serverTimezone=Hongkong
+          url: jdbc:mysql://192.168.3.33:3307/my_db?characterEncoding=utf8&useSSL=false&autoReconnect=true&failOverReadOnly=false&autoReconnectForPools=true&allowMultiQueries=true&serverTimezone=Hongkong&allowPublicKeyRetrieval=true
   redis:
-    host: 192.168.3.33
-    port: 6379
+    cluster:
+      max-redirects: 3
+      nodes:
+        - 192.168.3.33:6391
+        - 192.168.3.33:6392
+        - 192.168.3.33:6393
+        - 192.168.3.33:6394
+        - 192.168.3.33:6395
+        - 192.168.3.33:6396
+    lettuce:
+      pool:
+        #最大等待时间
+        max-wait: 1000ms
+        #最大连接数
+        max-active: 20
+        #最大空闲数量
+        max-idle: 20
+        #最小空闲数
+        min-idle: 1
+      shutdown-timeout: 300ms
