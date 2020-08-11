@@ -3,6 +3,8 @@ package com.yym.springboot.base.java.string;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 public class SubString {
     final String str = "ftp://hbgd:hbgd@172.25.7.6:21//opt/wacos/CTMSData/dispatch/smg_dispatch/2018/12/29/16/324516483/CJY_smp_6689205-54304744-1-16.xml";
     @Test
@@ -29,5 +31,14 @@ public class SubString {
         System.out.println("response = " + response);
 
 
-    }    
+    }
+
+    @Test
+    public void test2(){
+        String text = "a|b";
+        boolean contains = text.contains("|");
+        System.out.println("contains = " + contains);
+        String[] split = text.split("\\|");
+        System.out.println("split = " + Arrays.toString(split));
+    }
 }
